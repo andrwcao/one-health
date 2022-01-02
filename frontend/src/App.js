@@ -2,22 +2,21 @@ import React from 'react';
 import {
   BrowserRouter,
   Route,
-  Redirect,
-  Switch
+  Routes,
 } from 'react-router-dom';
 
-import OverviewPage from './user/pages/OverviewPage';
-import ProfilePage from './user/pages/ProfilePage';
-import HeartRatePage from './user/pages/HeartRatePage';
-import WeightPage from './user/pages/WeightPage';
-import LandingPage from './user/pages/LandingPage';
+import OverviewPage from './pages/OverviewPage';
+import ProfilePage from './pages/ProfilePage';
+import HeartRatePage from './pages/HeartRatePage';
+import WeightPage from './pages/WeightPage';
+import LandingPage from './pages/LandingPage';
 
-function App() {
-  TOKEN = true;
-
-  if (token) {
+const App = () => {
+  const TOKEN = false;
+  let routes;
+  if (TOKEN) {
     routes = (
-      <Switch>
+      <Routes>
         <Route path="/" exact>
           <OverviewPage />
         </Route>
@@ -30,17 +29,13 @@ function App() {
         <Route path="/weight">
           <WeightPage />
         </Route>
-        <Redirect to="/" />
-      </Switch>
+      </Routes>
     );
   } else {
     routes = (
-      <Switch>
-        <Route path="/" exact>
-          <LandingPage />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
+      <Routes>
+        <Route path="/" exact element={<LandingPage />}/>
+      </Routes>
     );
   }
 
