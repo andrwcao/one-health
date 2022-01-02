@@ -9,7 +9,7 @@ const useAuth = () => {
     };
   
     const logout = () => {
-      setIsLoggedIn(true)
+      setIsLoggedIn(false);
     };
 
     return { isLoggedIn, login, logout, userId };

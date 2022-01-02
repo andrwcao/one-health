@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,10 +11,14 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Stack from '@mui/material/Stack';
+
+import { AuthContext } from '../context/auth-context';
+import PrimaryButton from '../buttons/PrimaryButton';
 
 
-
-const ResponsiveAppBar = (props) => {
+const ResponsiveAppBar = () => {
+  const auth = useContext(AuthContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -32,8 +36,7 @@ const ResponsiveAppBar = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const TOKEN = false;
-  const pages = (TOKEN ? ['Overview', 'Weight', 'Heart Rate'] : []);
+  const pages = (auth.isLoggedIn ? ['Overview', 'Weight', 'Heart Rate'] : []);
   const settings = ['Profile', 'Logout'];
 
   return (
@@ -106,11 +109,17 @@ const ResponsiveAppBar = (props) => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            {auth.isLoggedIn ?
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip> :
+              <Stack spacing={2} direction="row">
+                <PrimaryButton>Sign Up</PrimaryButton>
+                <PrimaryButton>Login</PrimaryButton>
+              </Stack>
+            }     
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
