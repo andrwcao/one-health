@@ -5,16 +5,21 @@ import {
   Routes,
 } from 'react-router-dom';
 
+import useAuth from './shared/hooks/auth-hook.js';
+import { AuthContext } from './shared/context/auth-context';
+import MainNavigation from './shared/navigation/MainNavigation';
 import OverviewPage from './pages/OverviewPage';
 import ProfilePage from './pages/ProfilePage';
 import HeartRatePage from './pages/HeartRatePage';
 import WeightPage from './pages/WeightPage';
 import LandingPage from './pages/LandingPage';
+import SignUpPage from './pages/SignUpPage';
+import LoginPage from './pages/LoginPage';
 
 const App = () => {
-  const TOKEN = false;
+  const { isLoggedIn, login, logout, userId } = useAuth();
   let routes;
-  if (TOKEN) {
+  if (isLoggedIn) {
     routes = (
       <Routes>
         <Route path="/" exact>
@@ -35,15 +40,27 @@ const App = () => {
     routes = (
       <Routes>
         <Route path="/" exact element={<LandingPage />}/>
+        <Route path="/signup" exact element={<SignUpPage />}/>
+        <Route path="/login" exact element={<LoginPage />}/>
       </Routes>
     );
   }
 
   return (
-    <BrowserRouter>
-      {routes}
-    </BrowserRouter>
-  );
+      <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+        userId: userId,
+        login: login,
+        logout: logout
+      }}
+      >
+        <BrowserRouter>
+        <MainNavigation />
+          {routes}
+        </BrowserRouter>
+      </AuthContext.Provider>
+    );
 }
 
 export default App;
