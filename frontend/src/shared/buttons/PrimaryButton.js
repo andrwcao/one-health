@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 
 const PrimaryButton = (props) => {
     return (
-        <Button variant="contained">{props.children}</Button>
+        <Button onClick={props.onClick} variant="contained">{props.children}</Button>
     );
 }
 

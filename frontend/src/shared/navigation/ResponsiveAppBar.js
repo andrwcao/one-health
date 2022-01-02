@@ -36,6 +36,14 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const toSignUpPage = () => {
+    window.location.href=window.location.href.split('/')[0]+'signup';
+  }
+
+  const toLoginPage = () => {
+    window.location.href=window.location.href.split('/')[0]+'login';
+  }
   const pages = (auth.isLoggedIn ? ['Overview', 'Weight', 'Heart Rate'] : []);
   const settings = ['Profile', 'Logout'];
 
@@ -116,8 +124,8 @@ const ResponsiveAppBar = () => {
                 </IconButton>
               </Tooltip> :
               <Stack spacing={2} direction="row">
-                <PrimaryButton>Sign Up</PrimaryButton>
-                <PrimaryButton>Login</PrimaryButton>
+                <PrimaryButton onClick={toSignUpPage}>Sign Up</PrimaryButton>
+                <PrimaryButton onClick={toLoginPage}>Login</PrimaryButton>
               </Stack>
             }     
             <Menu
