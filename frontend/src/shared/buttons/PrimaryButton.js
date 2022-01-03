@@ -11,6 +11,7 @@ const PrimaryButton = (props) => {
             onClick={props.onClick} 
             className={props.className}
             id={props.id}
+            type={props.type}
         >
             {props.children}
         </Button>
