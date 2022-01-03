@@ -1,0 +1,28 @@
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.paper {
+    margin: 100px;
+    width: 400px;
+    padding: 60px;
+}
+
+.head-divider {
+    color: black;
+}
+
+.SignUpHeading {
+    margin-top: 0px;
+}
+
+.body {
+    padding-top: 20px;
+}
+
+#signUpButton {
+    margin-top: 14px; 
+    float: right;
+}

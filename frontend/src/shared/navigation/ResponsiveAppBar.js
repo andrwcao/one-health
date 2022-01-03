@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 
 import { AuthContext } from '../context/auth-context';
-import PrimaryButton from '../buttons/PrimaryButton';
+import LinkButton from '../buttons/LinkButton';
 
 
 const ResponsiveAppBar = () => {
@@ -37,13 +37,6 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
-  const toSignUpPage = () => {
-    window.location.href=window.location.href.split('/')[0]+'signup';
-  }
-
-  const toLoginPage = () => {
-    window.location.href=window.location.href.split('/')[0]+'login';
-  }
   const pages = (auth.isLoggedIn ? ['Overview', 'Weight', 'Heart Rate'] : []);
   const settings = ['Profile', 'Logout'];
 
@@ -57,7 +50,7 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            OneHealth
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -124,8 +117,8 @@ const ResponsiveAppBar = () => {
                 </IconButton>
               </Tooltip> :
               <Stack spacing={2} direction="row">
-                <PrimaryButton onClick={toSignUpPage}>Sign Up</PrimaryButton>
-                <PrimaryButton onClick={toLoginPage}>Login</PrimaryButton>
+                <LinkButton link='/signup'>Sign Up</LinkButton>
+                <LinkButton link='/login'>Login</LinkButton>
               </Stack>
             }     
             <Menu

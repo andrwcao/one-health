@@ -4,6 +4,7 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import useAuth from './shared/hooks/auth-hook.js';
 import { AuthContext } from './shared/context/auth-context';
@@ -18,6 +19,18 @@ import LoginPage from './pages/LoginPage';
 
 const App = () => {
   const { isLoggedIn, login, logout, userId } = useAuth();
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#1c1c1c'
+      },
+      secondary: {
+        main: '#434343'
+      }
+    }
+  });
+  
   let routes;
   if (isLoggedIn) {
     routes = (
@@ -55,11 +68,14 @@ const App = () => {
         logout: logout
       }}
       >
-        <BrowserRouter>
-        <MainNavigation />
-          {routes}
-        </BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+          <MainNavigation />
+              {routes}
+          </BrowserRouter>
+        </ThemeProvider>
       </AuthContext.Provider>
+
     );
 }
 

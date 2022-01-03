@@ -1,7 +1,7 @@
 import React from 'react';
 import MainHeader from './MainHeader';
 import ResponsiveAppBar from './ResponsiveAppBar';
-const MainNavigation = props => {
+const MainNavigation = () => {
     return (
         <MainHeader>
             <ResponsiveAppBar />
