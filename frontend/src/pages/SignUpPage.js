@@ -6,10 +6,6 @@ import PrimaryButton from '../shared/buttons/PrimaryButton';
 import './SignUpPage.css'
 
 const SignUpPage = () => {
-    
-    const signUp = () => {
-        console.log("signed up");
-    }
 
     const formik = useFormik({
         initialValues: {
@@ -86,7 +82,7 @@ const SignUpPage = () => {
                                         required
                                         id="password"
                                         name="password"
-                                        type="text"
+                                        type="password"
                                         label="Password"
                                         defaultValue=""
                                         fullWidth
@@ -99,7 +95,7 @@ const SignUpPage = () => {
                                         required
                                         id="confirmPassword"
                                         name="confirmPassword"
-                                        type="text"
+                                        type="password"
                                         label="Confirm Password"
                                         defaultValue=""
                                         fullWidth
@@ -128,7 +124,7 @@ const SignUpPage = () => {
                                     </Grid>
                                 </Grid>
                         </div>
-                        <PrimaryButton id='signUpButton' type='submit' onClick={signUp}>Sign Up</PrimaryButton>
+                        <PrimaryButton id='signUpButton' type='submit'>Sign Up</PrimaryButton>
                     </form>
             </Paper>
         </div>
