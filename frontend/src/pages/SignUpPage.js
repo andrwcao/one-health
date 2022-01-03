@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Divider, Grid, TextField, Button, ButtonGroup} from '@mui/material';
+import { Paper, Divider, Grid, TextField, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { useFormik } from 'formik';
 
 import PrimaryButton from '../shared/buttons/PrimaryButton';
@@ -13,12 +13,22 @@ const SignUpPage = () => {
 
     const formik = useFormik({
         initialValues: {
+            firstName: '',
+            lastName: '',
             email: '',
+            password: '',
+            confirmPassword: '',
+            gender: '',
         },
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            console.log(JSON.stringify(values, null, 2));
         },
     });
+
+    const handleGenderChange = (event, newGender) => {
+        // manually update formik
+        formik.setFieldValue('gender', newGender);
+      };
 
     return (
         <div className='box'>
@@ -59,7 +69,7 @@ const SignUpPage = () => {
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
-                                    <TextField
+                                        <TextField
                                         required
                                         id="email"
                                         name="email"
@@ -72,7 +82,7 @@ const SignUpPage = () => {
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
-                                    <TextField
+                                        <TextField
                                         required
                                         id="password"
                                         name="password"
@@ -85,7 +95,7 @@ const SignUpPage = () => {
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
-                                    <TextField
+                                        <TextField
                                         required
                                         id="confirmPassword"
                                         name="confirmPassword"
@@ -98,10 +108,23 @@ const SignUpPage = () => {
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <ButtonGroup fullWidth variant="outlined" aria-label="outlined button group">
-                                            <Button>Male</Button>
-                                            <Button>Female</Button>
-                                        </ButtonGroup>
+                                        <ToggleButtonGroup
+                                        exclusive
+                                        aria-label="text alignment"
+                                        id="gender"
+                                        name="gender"
+                                        type="text"
+                                        fullWidth
+                                        onChange={handleGenderChange}
+                                        value={formik.values.gender}
+                                        >
+                                            <ToggleButton value="Male" aria-label="left aligned">
+                                                Male
+                                            </ToggleButton>
+                                            <ToggleButton value="Female" aria-label="centered">
+                                                Female
+                                            </ToggleButton>
+                                        </ToggleButtonGroup>
                                     </Grid>
                                 </Grid>
                         </div>
