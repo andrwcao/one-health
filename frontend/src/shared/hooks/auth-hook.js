@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 
 const useAuth = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
     const [userId, setUserId] = useState(false);
   
     const login = () => {

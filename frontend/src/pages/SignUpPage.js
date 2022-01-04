@@ -3,7 +3,8 @@ import { Paper, Divider, Grid, TextField, ToggleButtonGroup, ToggleButton } from
 import { useFormik } from 'formik';
 
 import PrimaryButton from '../shared/buttons/PrimaryButton';
-import './SignUpPage.css'
+import './SignUpPage.css';
+import './Shared.css';
 
 const SignUpPage = () => {
 

@@ -19,7 +19,7 @@ import LoginPage from './pages/LoginPage';
 
 const App = () => {
   const { isLoggedIn, login, logout, userId } = useAuth();
-
+  
   const theme = createTheme({
     palette: {
       primary: {
@@ -35,18 +35,10 @@ const App = () => {
   if (isLoggedIn) {
     routes = (
       <Routes>
-        <Route path="/" exact>
-          <OverviewPage />
-        </Route>
-        <Route path="/profile" exact>
-          <ProfilePage />
-        </Route>
-        <Route path="/heart-rate" exact>
-          <HeartRatePage />
-        </Route>
-        <Route path="/weight">
-          <WeightPage />
-        </Route>
+        <Route path="/" exact element={<OverviewPage />}/>
+        <Route path="/profile" exact element={<ProfilePage />}/>
+        <Route path="/heart-rate" exact element={<HeartRatePage />}/>
+        <Route path="/weight" exact element={<WeightPage />}/>
       </Routes>
     );
   } else {

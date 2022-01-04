@@ -3,7 +3,8 @@ import { Paper, Divider, Stack, TextField} from '@mui/material';
 import { useFormik } from 'formik';
 
 import PrimaryButton from '../shared/buttons/PrimaryButton';
-import './LoginPage.css'
+import './LoginPage.css';
+import './Shared.css';
 
 const LoginPage = () => {
 
@@ -20,11 +21,11 @@ const LoginPage = () => {
     return (
         <div className='box'>
             <Paper 
-                variant='outlined'
-                className='paper' 
-                sx={
-                    {borderRadius: 2}
-                }
+            variant='outlined'
+            className='paper' 
+            sx={
+                {borderRadius: 2}
+            }
             >
                 <h2 className='LoginHeading'>Login</h2>
                 <Divider className='head-divider'/>
