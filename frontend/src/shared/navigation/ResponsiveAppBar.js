@@ -135,11 +135,16 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
+                (setting.toLowerCase() == 'logout' ?
+                <MenuItem key={setting} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
+                :
                 <Link to={setting.toLowerCase().split(' ').join('-')} style={{ textDecoration: 'none', color: 'black' }}>
                   <MenuItem key={setting} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
-                </Link>
+                </Link>)
               ))}
             </Menu>
           </Box>
