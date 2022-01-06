@@ -1,14 +1,12 @@
-const { Router } = require('express');
-const { check } = require('express-validator')
+const express = require('express');
+const { check } = require('express-validator');
+
 const usersController = require('../controllers/users-controllers');
 const HttpError = require('../models/http-error');
 
-const router = Router();
+const router = express.Router();
 
-// When users request to sign up
-router.post(
-    '/signup', 
-    [
+/*
         check('fName')
             .not()
             .isEmpty(),
@@ -19,6 +17,13 @@ router.post(
             .normalizeEmail()
             .isEmail(),
         check('password').isLength({min: 8}),
+*/
+
+// When users request to sign up
+router.post(
+    '/signup', 
+    [
+
     ],
     usersController.signUp
 );

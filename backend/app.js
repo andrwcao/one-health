@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const HttpError = require('./models/http-error');
 const usersRoutes = require('./routes/users-routes');
 
 // Use the express framework
@@ -17,9 +18,12 @@ app.use((req, res, next) => {
         'Origin, X-Requested-With, Content-Type, Accept, Authorization'
     );
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-    
+
     next();
 });
+
+// Routes provided can be accessed and respond accordingly
+app.use('/api/users', usersRoutes);
 
 // Handles invalid routes
 app.use((req, res, next) => {
@@ -37,9 +41,6 @@ app.use((error, req, res, next) => {
     res.status(error.code || 500);
     res.json({ message: error.message || 'An unknown error occurred!' });
 });
-
-// Routes provided can be accessed and respond accordingly
-app.use('/api/users', usersRoutes);
 
 mongoose
     .connect('mongodb+srv://andrwcao:ZLfOFDniZoFGEiPG@cluster0.npmxz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')

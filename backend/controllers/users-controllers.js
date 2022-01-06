@@ -1,24 +1,25 @@
 const { v4: uuid } = require('uuid');
 const { validationResult } = require('express-validator');
+
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 
 const signUp = async (req, res, next) => {
-  const errors = validationRequest(req);
+  /*const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = new HttpError(
       "Invalid data was passed.", 
       422
     );
     return next(error);
-  }
+  }*/
 
   const { fName, lName, email, password, gender } = req.body;
 
   let identifiedUser;
   
   try {
-    identifiedUser = await User.findOne({email: email});
+    identifiedUser = await User.findOne({ email: email });
   } catch(err) {
     const error = new HttpError(
       'Sign up failed, please try again later.',
