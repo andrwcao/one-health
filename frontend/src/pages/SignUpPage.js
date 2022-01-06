@@ -2,11 +2,38 @@ import React from 'react';
 import { Paper, Divider, Grid, TextField, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { useFormik } from 'formik';
 
+import useAuth from '../shared/hooks/auth-hook.js';
 import PrimaryButton from '../shared/buttons/PrimaryButton';
 import './SignUpPage.css';
 import './Shared.css';
 
 const SignUpPage = () => {
+    const { isLoggedIn, login, logout, userId } = useAuth();
+
+    const onSubmitHandler = async (values) => {
+        try {
+            const res = await fetch('http://localhost:5000/api/users/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fName: values.firstName,
+                    lName: values.lastName,
+                    email: values.email,
+                    password: values.password,
+                    gender: values.gender,
+                })
+            });
+
+            const responseData = await res.json();
+            console.log(responseData);
+        } catch (err) {
+            console.log(err);
+        }
+
+        login();
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -17,15 +44,13 @@ const SignUpPage = () => {
             confirmPassword: '',
             gender: '',
         },
-        onSubmit: values => {
-            console.log(JSON.stringify(values, null, 2));
-        },
+        onSubmit: onSubmitHandler,
     });
 
     const handleGenderChange = (event, newGender) => {
         // manually update formik
         formik.setFieldValue('gender', newGender);
-      };
+    };
 
     return (
         <div className='box'>
