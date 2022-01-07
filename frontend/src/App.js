@@ -18,7 +18,7 @@ import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 
 const App = () => {
-  const { isLoggedIn, login, logout, userId } = useAuth();
+  const { token, login, logout } = useAuth();
   
   const theme = createTheme({
     palette: {
@@ -32,7 +32,7 @@ const App = () => {
   });
   
   let routes;
-  if (isLoggedIn) {
+  if (token) {
     routes = (
       <Routes>
         <Route path="/" exact element={<OverviewPage />}/>
@@ -54,8 +54,7 @@ const App = () => {
   return (
       <AuthContext.Provider
       value={{
-        isLoggedIn: isLoggedIn,
-        userId: userId,
+        token: token,
         login: login,
         logout: logout
       }}

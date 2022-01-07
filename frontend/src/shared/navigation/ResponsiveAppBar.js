@@ -22,15 +22,20 @@ const ResponsiveAppBar = () => {
 
   };
 
-  const handleCloseNavMenu = (event) => {
+  const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = (event) => {
+  const handleLogout = () => {
+    handleCloseNavMenu();
+    auth.logout();
+  }
+
+  const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
-  const pages = (auth.isLoggedIn ? ['Overview', 'Weight', 'Heart Rate'] : []);
+  const pages = (auth.token ? ['Overview', 'Weight', 'Heart Rate'] : []);
   const settings = ['Profile', 'Logout'];
 
   return (
@@ -107,7 +112,7 @@ const ResponsiveAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {auth.isLoggedIn ?
+            {auth.token ?
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -117,7 +122,7 @@ const ResponsiveAppBar = () => {
                 <LinkButton link='/signup'>Sign Up</LinkButton>
                 <LinkButton link='/login'>Login</LinkButton>
               </Stack>
-            }     
+            } 
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -133,10 +138,11 @@ const ResponsiveAppBar = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              onClick={handleCloseUserMenu}
             >
               {settings.map((setting) => (
                 (setting.toLowerCase() == 'logout' ?
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
+                <MenuItem key={setting} selection={setting} onClick={handleLogout}>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
                 :
@@ -147,6 +153,7 @@ const ResponsiveAppBar = () => {
                 </Link>)
               ))}
             </Menu>
+            
           </Box>
         </Toolbar>
       </Container>

@@ -1,21 +1,41 @@
-import React from 'react';
+import { React, useContext } from 'react';
 import { Paper, Divider, Stack, TextField} from '@mui/material';
 import { useFormik } from 'formik';
 
+import { AuthContext } from '../shared/context/auth-context';
 import PrimaryButton from '../shared/buttons/PrimaryButton';
 import './LoginPage.css';
 import './Shared.css';
 
 const LoginPage = () => {
+    const auth = useContext(AuthContext);
+
+    const onSubmitHandler = async (values) => {
+        try {
+            const res = await fetch('http://localhost:5000/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: values.email,
+                    password: values.password,
+                })
+            });
+
+            const responseData = await res.json();
+            auth.login();
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
         },
-        onSubmit: values => {
-            console.log(JSON.stringify(values, null, 2));
-        },
+        onSubmit: onSubmitHandler,
     });
 
     return (

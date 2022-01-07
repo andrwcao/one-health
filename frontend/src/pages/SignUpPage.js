@@ -1,14 +1,14 @@
-import React from 'react';
+import { React, useContext } from 'react';
 import { Paper, Divider, Grid, TextField, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { useFormik } from 'formik';
 
-import useAuth from '../shared/hooks/auth-hook.js';
+import { AuthContext } from '../shared/context/auth-context';
 import PrimaryButton from '../shared/buttons/PrimaryButton';
 import './SignUpPage.css';
 import './Shared.css';
 
 const SignUpPage = () => {
-    const { isLoggedIn, login, logout, userId } = useAuth();
+    const auth = useContext(AuthContext);
 
     const onSubmitHandler = async (values) => {
         try {
@@ -27,12 +27,10 @@ const SignUpPage = () => {
             });
 
             const responseData = await res.json();
-            console.log(responseData);
+            auth.login();
         } catch (err) {
             console.log(err);
         }
-
-        login();
     };
 
     const formik = useFormik({
