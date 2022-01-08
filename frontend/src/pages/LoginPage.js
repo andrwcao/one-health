@@ -24,7 +24,7 @@ const LoginPage = () => {
             });
 
             const responseData = await res.json();
-            auth.login();
+            auth.login(responseData.token);
         } catch (err) {
             console.log(err);
         }
