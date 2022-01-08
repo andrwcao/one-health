@@ -10,10 +10,10 @@ const DatePicker = (props) => {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
             label={props.title}
-            value={value}
+            value={props.date}
             minDate={new Date('2017-01-01')}
-            onChange={(newValue) => {
-                setValue(newValue);
+            onChange={(newDate) => {
+                props.setDate(newDate);
             }}
             renderInput={(params) => <TextField {...params} />}
             />

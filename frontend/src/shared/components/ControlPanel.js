@@ -3,21 +3,28 @@ import { Grid, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import DatePicker from './DatePicker';
 
 import './ControlPanel.css'
-const ControlPanel = () => {
-    const [datePrecision, setDatePrecision] = React.useState('left');
+const ControlPanel = (props) => {
 
     const handleDatePrecision = (event, newDatePrecision) => {
-      setDatePrecision(newDatePrecision);
+        props.setDatePrecision(newDatePrecision);
     };
 
     return (
         <div className='control-panel'>
             <Grid container spacing={2}>
                 <Grid item xs={6}>
-                    <DatePicker title='From'/>
+                    <DatePicker
+                    title='From'
+                    date={props.fromDate}
+                    setDate={props.setFromDate} 
+                    />
                 </Grid>
                 <Grid item xs={6}>
-                    <DatePicker title='To'/>
+                    <DatePicker 
+                    title='To'
+                    date={props.toDate}
+                    setDate={props.setToDate} 
+                    />
                 </Grid>
                 <Grid item xs={12}>
                     <ToggleButtonGroup
@@ -28,7 +35,7 @@ const ControlPanel = () => {
                     type="text"
                     fullWidth
                     onChange={handleDatePrecision}
-                    value={datePrecision}
+                    value={props.datePrecision}
                     >
                         <ToggleButton value="Daily" aria-label="left aligned">
                             Daily
