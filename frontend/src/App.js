@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import {
   BrowserRouter,
   Route,
@@ -9,13 +9,16 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import useAuth from './shared/hooks/auth-hook.js';
 import { AuthContext } from './shared/context/auth-context';
 import MainNavigation from './shared/navigation/MainNavigation';
-import OverviewPage from './pages/OverviewPage';
-import ProfilePage from './pages/ProfilePage';
-import HeartRatePage from './pages/HeartRatePage';
-import WeightPage from './pages/WeightPage';
-import LandingPage from './pages/LandingPage';
-import SignUpPage from './pages/SignUpPage';
-import LoginPage from './pages/LoginPage';
+
+
+
+const OverviewPage = React.lazy(() => import('./pages/OverviewPage'));
+const ProfilePage = React.lazy(() => import('./pages/ProfilePage'));
+const HeartRatePage = React.lazy(() => import('./pages/HeartRatePage'));
+const WeightPage = React.lazy(() => import('./pages/WeightPage'));
+const LandingPage = React.lazy(() => import('./pages/LandingPage'));
+const SignUpPage = React.lazy(() => import('./pages/SignUpPage'));
+const LoginPage = React.lazy(() => import('./pages/LoginPage'));
 
 const App = () => {
   const { token, login, logout } = useAuth();
@@ -62,7 +65,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
           <BrowserRouter>
           <MainNavigation />
-              {routes}
+              <Suspense fallback={<div>Loading</div>}>{routes}</Suspense>
           </BrowserRouter>
         </ThemeProvider>
       </AuthContext.Provider>

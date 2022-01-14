@@ -10,6 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import faker from 'faker';
 
 import './Chart.css';
 
@@ -40,9 +41,9 @@ const Chart = (props) => {
       datasets: [
           {
           label: 'Dataset 1',
-          data: labels.map(() => 1000),
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+          borderColor: props.colour,
+          backgroundColor: props.colour,
           },
       ],
   };

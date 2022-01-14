@@ -5,19 +5,19 @@ import Chart from '../components/Chart';
 import ControlPanel from './ControlPanel';
 
 import './GraphPage.css';
+import { areDayPropsEqual } from '@mui/lab/PickersDay/PickersDay';
 
 const GraphPage = (props) => {
     const [fromDate, setFromDate] = useState(new Date(new Date().setFullYear(new Date().getFullYear() - 1)));
     const [toDate, setToDate] = useState(Date.now());
     const [datePrecision, setDatePrecision] = useState('Daily');
     const [xAxis, setXAxis] = useState(props.xData);
-    const dog = (date) => {
-        return (new Date(date)) >= (fromDate);
-    };
 
     useEffect(() => {
-        setXAxis(props.xData.filter(dog));
-    },[fromDate]);
+        setXAxis(props.xData.filter((date) => {
+            return (new Date(date) >= fromDate) && (new Date(date) <= toDate);
+        }));
+    },[fromDate, toDate]);
 
     return (
         <Grid container spacing={2}>
@@ -31,6 +31,7 @@ const GraphPage = (props) => {
                     {props.children}
                     <Chart
                     xAxis={xAxis}
+                    colour={props.colour}
                     />
                 </Card>
             </Grid>

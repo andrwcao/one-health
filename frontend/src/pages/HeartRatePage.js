@@ -1,8 +1,20 @@
 import React from 'react';
+import { CardHeader } from '@mui/material';
+
+import GraphPage from '../shared/components/GraphPage';
+import './Shared.css';
 
 const HeartRatePage = () => {
+    const xData = ['11/11/21', '11/12/21', '11/13/21', '11/14/21', '11/15/21', '11/16/21', '11/18/21'];
     return (
-        <h1>Heart rate page works!</h1>
+        <div className='box'>
+            <GraphPage xData={xData} colour='rgba(232, 60, 126)'>
+                <CardHeader
+                title="Weight"
+                subheader=""
+                />
+            </GraphPage>
+        </div>
     );
 };
 

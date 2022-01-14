@@ -73,7 +73,7 @@ const signUp = async (req, res, next) => {
   // Creates JWT to be sent back
   let token;
   try {
-    token = jwt.sign({userId: createdUser.id}, 'zKt6ncsG92iHSys4All6', {expiresIn: '24h'});
+    token = jwt.sign({userId: createdUser.id}, process.env.SECRET_KEY, {expiresIn: '24h'});
   } catch(err) {
     const error = new HttpError(
       'Sign up failed, please try again later.',
@@ -131,7 +131,7 @@ const login = async (req, res, next) => {
   // Creates JWT to be sent back
   let token;
   try {
-    token = jwt.sign({userId: identifiedUser.id}, 'zKt6ncsG92iHSys4All6', {expiresIn: '24h'});
+    token = jwt.sign({userId: identifiedUser.id}, process.env.SECRET_KEY, {expiresIn: '24h'});
   } catch(err) {
     const error = new HttpError(
       'Sign up failed, please try again later.',

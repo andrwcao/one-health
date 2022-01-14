@@ -12,7 +12,7 @@ const SignUpPage = () => {
 
     const onSubmitHandler = async (values) => {
         try {
-            const res = await fetch('http://localhost:5000/api/users/signup', {
+            const res = await fetch(process.env.REACT_APP_BACKEND_URL + '/users/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

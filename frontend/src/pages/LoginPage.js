@@ -9,10 +9,10 @@ import './Shared.css';
 
 const LoginPage = () => {
     const auth = useContext(AuthContext);
-
+    
     const onSubmitHandler = async (values) => {
         try {
-            const res = await fetch('http://localhost:5000/api/users/login', {
+            const res = await fetch(process.env.REACT_APP_BACKEND_URL + '/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
