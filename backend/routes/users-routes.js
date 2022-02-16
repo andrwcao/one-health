@@ -27,18 +27,8 @@ router.post(
 
 router.post('/login', usersController.login);
 
-router.get('/', (req, res) => {
-    res.send('<a href="/api/users/auth/fitbit">Authenticate with FITBIT</a>');
-});
-
-router.get('/auth/fitbit', usersController.fitbit);
-
-router.get( '/auth/fitbit/callback', usersController.fitbitCallback);
-
 // Routes below this are inaccessible unless authenticated
 router.use(checkAuth);
-
-
 
 router.patch('/', usersController.updateUser);
 
