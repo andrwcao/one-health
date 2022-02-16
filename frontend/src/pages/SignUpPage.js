@@ -138,10 +138,10 @@ const SignUpPage = () => {
                                         onChange={handleGenderChange}
                                         value={formik.values.gender}
                                         >
-                                            <ToggleButton value="Male" aria-label="left aligned">
+                                            <ToggleButton id="male-button" value="Male" aria-label="left aligned">
                                                 Male
                                             </ToggleButton>
-                                            <ToggleButton value="Female" aria-label="centered">
+                                            <ToggleButton id="female-button" value="Female" aria-label="centered">
                                                 Female
                                             </ToggleButton>
                                         </ToggleButtonGroup>

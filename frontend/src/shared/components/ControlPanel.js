@@ -14,6 +14,7 @@ const ControlPanel = (props) => {
             <Grid container spacing={2}>
                 <Grid item xs={6}>
                     <DatePicker
+                    id='fromDate'
                     title='From'
                     date={props.fromDate}
                     setDate={props.setFromDate} 
@@ -21,6 +22,7 @@ const ControlPanel = (props) => {
                 </Grid>
                 <Grid item xs={6}>
                     <DatePicker 
+                    id='toDate'
                     title='To'
                     date={props.toDate}
                     setDate={props.setToDate} 

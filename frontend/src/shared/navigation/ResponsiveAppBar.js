@@ -47,6 +47,7 @@ const ResponsiveAppBar = () => {
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            id="navigation-title"
           >
             OneHealth
           </Typography>
@@ -81,11 +82,13 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <Link to={page.toLowerCase().split(' ').join('-')} style={{ textDecoration: 'none', color: 'black' }}>
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                </Link>
+                <div>
+                  <Link id={page} to={page.toLowerCase().split(' ').join('-')} style={{ textDecoration: 'none', color: 'black' }}>
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">{page}</Typography>
+                    </MenuItem>
+                  </Link>
+                </div>
               ))}
             </Menu>
           </Box>
@@ -119,8 +122,8 @@ const ResponsiveAppBar = () => {
                 </IconButton>
               </Tooltip> :
               <Stack spacing={2} direction="row">
-                <LinkButton link='/signup'>Sign Up</LinkButton>
-                <LinkButton link='/login'>Login</LinkButton>
+                <LinkButton id='sign-up-button' link='/signup'>Sign Up</LinkButton>
+                <LinkButton id='login-button' link='/login'>Login</LinkButton>
               </Stack>
             } 
             <Menu

@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
@@ -146,9 +147,16 @@ const login = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
 };
 
+const fitbit = (req, res, next) => {
+  
+};
 
-
+const fitbitCallback = (req, res, next) => {
+  
+};
 
 exports.signUp = signUp;
 exports.login = login;
 exports.updateUser = updateUser;
+exports.fitbit = fitbit;
+exports.fitbitCallback = fitbitCallback;

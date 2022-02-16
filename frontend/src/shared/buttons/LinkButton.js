@@ -9,6 +9,7 @@ const LinkButton = (props) => {
                 variant="contained"
                 size="large"
                 color="secondary"
+                id={props.id}
                 onClick={props.onClick} 
             >
                 {props.children}
