@@ -11,19 +11,16 @@ passport.use(new FitbitStrategy({
     passReqToCallback: true
   },
   function(req, accessToken, refreshToken, profile, done) {
-      console.log(req.dog);
-  }
-));
-/*
-router.use(async (req, res, next) => {
+    console.log(req);
+    console.log(profile);
     //const userId = req.userData.userId;
     const userId = '61e1519686fc40a3617a05be';
-    
-    identifiedUser = await User.find({ _id: userId });
+    /*identifiedUser = await User.findOneAndUpdate({ _id: userId }, { });
+    await User.findOneAndUpdate();
     console.log(profile);
     console.log("dfkoe:" + identifiedUser);
-    User.findOrCreate({ fitbitId: profile.id }, function (err, user) {
+    User.findOrCreate({ fitbitId: profile.id }, function (err, user) {}
         return done(err, user);
-      });
-});
-*/
+      });*/
+  }
+));
