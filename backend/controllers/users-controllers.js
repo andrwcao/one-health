@@ -147,16 +147,6 @@ const login = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
 };
 
-const fitbit = (req, res, next) => {
-  
-};
-
-const fitbitCallback = (req, res, next) => {
-  
-};
-
 exports.signUp = signUp;
 exports.login = login;
 exports.updateUser = updateUser;
-exports.fitbit = fitbit;
-exports.fitbitCallback = fitbitCallback;

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const HttpError = require('./models/http-error');
 const usersRoutes = require('./routes/users-routes');
 const fitbitRoutes = require('./routes/fitbit-routes');
-
+require('./middleware/fitbit-auth');
 require('dotenv').config();
 
 const passport = require('passport');
@@ -30,18 +30,6 @@ app.use((req, res, next) => {
 
 // Routes provided can be accessed and respond accordingly
 app.use('/api/users', usersRoutes);
-
-passport.use(new FitbitStrategy({
-    clientID:     '237YKH',
-    clientSecret: '32329ffe93dff6284376d7378fa5b624',
-    callbackURL: "http://localhost:5000/fitbit/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ fitbitId: profile.id }, function (err, user) {
-      return done(err, user);
-    });
-  }
-));
 
 app.use('/fitbit', fitbitRoutes);
 
