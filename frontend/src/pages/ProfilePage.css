@@ -1,0 +1,25 @@
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.connectionPaper {
+    margin: 0px;
+    margin-top: 40px;
+    width: 1200px;
+    padding: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.tablePaper {
+    margin: 0px;
+    margin-top: 20px;
+    width: 1200px;
+    padding: 40px;
+}
+
+#fitbit-button {
+    
+}

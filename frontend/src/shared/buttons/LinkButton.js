@@ -6,9 +6,9 @@ const LinkButton = (props) => {
     return (
         <Link to={props.link} style={{ textDecoration: 'none' }}>
             <Button
-                variant="contained"
+                variant={props.variant}
                 size="large"
-                color="secondary"
+                color={props.color}
                 id={props.id}
                 onClick={props.onClick} 
             >

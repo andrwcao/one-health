@@ -122,8 +122,8 @@ const ResponsiveAppBar = () => {
                 </IconButton>
               </Tooltip> :
               <Stack spacing={2} direction="row">
-                <LinkButton id='sign-up-button' link='/signup'>Sign Up</LinkButton>
-                <LinkButton id='login-button' link='/login'>Login</LinkButton>
+                <LinkButton id='sign-up-button' link='/signup' color='secondary' variant='contained'>Sign Up</LinkButton>
+                <LinkButton id='login-button' link='/login' color='secondary' variant='contained'>Login</LinkButton>
               </Stack>
             } 
             <Menu

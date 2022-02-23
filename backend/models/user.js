@@ -9,7 +9,14 @@ const userSchema = new Schema(
         email: { type: String, required: true },
         password: { type: String, required: true },
         gender: { type: String, required: true },
-        fitKey: { type: String },
+        fitbitId: { type: String },
+        age: { type: String },
+        dateOfBirth: { type: String },
+        height: { type: String },
+        heightUnit: { type: String },
+        memberSince: { type: String },
+        weight: { type: String },
+        weightUnit: { type: String },
     }
 );
 

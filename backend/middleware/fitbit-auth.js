@@ -1,8 +1,8 @@
 const express = require('express');
 const passport = require('passport');
 const FitbitStrategy = require( 'passport-fitbit-oauth2' ).FitbitOAuth2Strategy;
-
 const router = express.Router();
+const User = require('../models/user');
 
 passport.use(new FitbitStrategy({
     clientID:     '237YKH',
@@ -10,17 +10,27 @@ passport.use(new FitbitStrategy({
     callbackURL: "http://localhost:5000/fitbit/callback",
     passReqToCallback: true
   },
-  function(req, accessToken, refreshToken, profile, done) {
-    console.log(req);
-    console.log(profile);
-    //const userId = req.userData.userId;
-    const userId = '61e1519686fc40a3617a05be';
-    /*identifiedUser = await User.findOneAndUpdate({ _id: userId }, { });
-    await User.findOneAndUpdate();
-    console.log(profile);
-    console.log("dfkoe:" + identifiedUser);
-    User.findOrCreate({ fitbitId: profile.id }, function (err, user) {}
-        return done(err, user);
-      });*/
+  async function(req, accessToken, refreshToken, profile, done) {
+    const userId = req.userData.userId;
+    
+    let fitbitId = profile.userId;
+    let { age, dateOfBirth, height, heightUnit, memberSince, weight, weightUnit } = profile._json.user;
+
+    await User.findOneAndUpdate(
+        { _id: userId },
+        {
+            fitbitId,
+            age,
+            dateOfBirth,
+            height,
+            heightUnit,
+            memberSince,
+            weight,
+            weightUnit,
+        },
+        function (err, user) {
+            return done(err, user);
+        }
+    );
   }
 ));
