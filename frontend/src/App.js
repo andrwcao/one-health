@@ -48,7 +48,6 @@ const App = () => {
     routes = (
       <Routes>
         <Route path="/" exact element={<LandingPage />}/>
-        <Route path="/profile" exact element={<ProfilePage />}/>
         <Route path="/signup" exact element={<SignUpPage />}/>
         <Route path="/login" exact element={<LoginPage />}/>
       </Routes>

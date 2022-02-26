@@ -7,8 +7,12 @@ export default function UserInformationTable(props) {
     { field: 'value', headerName: 'Value', width: 130 },
   ];
   const { fitbitId, age, dateOfBirth, height, heightUnit, weight, weightUnit, memberSince } = props.fitbitInfo;
-  const heightUnitConverted = (heightUnit === 'METRIC') ? 'cm' : '""""';
+  const heightUnitConverted = (heightUnit === 'METRIC') ? 'cm' : '"';
   const weightUnitConverted = (weightUnit === 'METRIC') ? 'kg' : 'lb';
+  if (fitbitId == null) {
+    heightUnitConverted = '';
+    weightUnitConverted = '';   
+  }
   const rows = [
     { id: 1, key: 'Fitbit ID', value: fitbitId },
     { id: 2, key: 'Age', value: age },
