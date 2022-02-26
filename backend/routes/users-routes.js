@@ -30,6 +30,8 @@ router.post('/login', usersController.login);
 // Routes below this are inaccessible unless authenticated
 router.use(checkAuth);
 
-router.patch('/', usersController.updateUser);
+router.get('/', usersController.getUserData);
+
+router.patch('/patch', usersController.updateUser);
 
 module.exports = router;

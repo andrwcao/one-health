@@ -144,9 +144,26 @@ const login = async (req, res, next) => {
   res.status(201).json({userId: identifiedUser.id, token: token});
 };
 
+const getUserData = async (req, res, next) => {
+  const userId = req.userData.userId;
+  let user = null;
+    // Saves user to database
+    try {
+      user = await User.findOne({_id: userId});
+    } catch(err) {
+      const error = new HttpError(
+        'Could not perform request, please try again later.',
+        500
+      );
+      return next(error);
+    }
+  res.json({user});
+};
+
 const updateUser = async (req, res, next) => {
 };
 
 exports.signUp = signUp;
 exports.login = login;
+exports.getUserData = getUserData;
 exports.updateUser = updateUser;

@@ -1,4 +1,4 @@
-import { React, useContext } from 'react';
+import { React, useContext, useState, useEffect } from 'react';
 import LinkButton from '../shared/buttons/LinkButton';
 import FitbitIcon from '@mui/icons-material/Fitbit';
 import { Button, Grid, Paper, Divider } from '@mui/material';
@@ -9,10 +9,43 @@ import UserInformationTable from '../components/ProfilePage/UserInformationTable
 
 const ProfilePage = () => {
     const auth = useContext(AuthContext);
-    
-    const reload = async () => {
-        //window.location.reload(false);
-    };
+    const [fitbitInfo, setFitbitInfo] = useState({
+        fitbitId: '',
+        age: '',
+        dateOfBirth: '',
+        height: '',
+        heightUnit: '',
+        weight: '',
+        weightUnit: '',
+        memberSince: '',
+    });
+    useEffect(async () => {
+        try {
+            const res = await fetch(process.env.REACT_APP_BACKEND_URL + '/users', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': auth.token,
+                }
+            });
+            const responseData = await res.json();
+            console.log(responseData.user)
+            const { fitbitId, age, dateOfBirth, height, heightUnit, weight, weightUnit, memberSince } = responseData.user;
+            setFitbitInfo({        
+                fitbitId,
+                age,
+                dateOfBirth,
+                height,
+                heightUnit,
+                weight,
+                weightUnit,
+                memberSince,
+            });
+
+        } catch (err) {
+            console.log(err);
+        }
+      }, []);
 
     return (
         <div>
@@ -34,7 +67,7 @@ const ProfilePage = () => {
                         </Grid>
                         <Grid item xs>
                             <a href={`http://localhost:5000/fitbit/${auth.token}`} target='_blank' style={{ textDecoration: 'none' }}>
-                            <Button id='fitbit-button' color='primary' onClick={reload}variant='outlined' style={{ textDecoration: 'none', color: '#00B0B9' }}>
+                            <Button id='fitbit-button' color='primary' variant='outlined' style={{ textDecoration: 'none', color: '#00B0B9' }}>
                                 <FitbitIcon/>
                                 FITBIT
                             </Button>
@@ -51,7 +84,7 @@ const ProfilePage = () => {
                     {borderRadius: 2}
                 }
                 >
-                    <UserInformationTable/>
+                    <UserInformationTable fitbitInfo={fitbitInfo}/>
                 </Paper>
             </div>
         </div>
