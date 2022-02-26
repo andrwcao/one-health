@@ -11,11 +11,11 @@ passport.use(new FitbitStrategy({
     passReqToCallback: true
   },
   async function(req, accessToken, refreshToken, profile, done) {
-    const userId = req.userData.userId;
-    
-    let fitbitId = profile.userId;
+    //const userId = req.userData.userId;
+    const userId = '6216120d159366ec6304adb3';
+    let fitbitId = profile.id;
     let { age, dateOfBirth, height, heightUnit, memberSince, weight, weightUnit } = profile._json.user;
-
+    console.log(fitbitId);
     await User.findOneAndUpdate(
         { _id: userId },
         {
@@ -27,10 +27,8 @@ passport.use(new FitbitStrategy({
             memberSince,
             weight,
             weightUnit,
-        },
-        function (err, user) {
-            return done(err, user);
         }
     );
+    return;
   }
 ));

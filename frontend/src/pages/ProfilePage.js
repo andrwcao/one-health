@@ -10,22 +10,8 @@ import UserInformationTable from '../components/ProfilePage/UserInformationTable
 const ProfilePage = () => {
     const auth = useContext(AuthContext);
     
-    const authenticateWithFitbit = async () => {
-        try {
-            const res = await fetch('http://localhost:5000' + '/fitbit', {
-                mode: 'cors',
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': auth.token,
-                }
-            });
-            console.log('dog');
-            const responseData = await res.json();
-            console.log(responseData);
-        } catch (err) {
-            console.log(err);
-        }
+    const reload = async () => {
+        //window.location.reload(false);
     };
 
     return (
@@ -47,13 +33,12 @@ const ProfilePage = () => {
                             <h2>User Information</h2>
                         </Grid>
                         <Grid item xs>
-                            <a href={`http://localhost:5000/fitbit/${auth.token}`}>
-                                dog
-                            </a>
-                            <Button id='fitbit-button' onClick={authenticateWithFitbit} color='primary' variant='outlined' style={{ textDecoration: 'none', color: '#00B0B9' }}>
+                            <a href={`http://localhost:5000/fitbit/${auth.token}`} target='_blank' style={{ textDecoration: 'none' }}>
+                            <Button id='fitbit-button' color='primary' onClick={reload}variant='outlined' style={{ textDecoration: 'none', color: '#00B0B9' }}>
                                 <FitbitIcon/>
                                 FITBIT
                             </Button>
+                            </a>
                         </Grid>
                     </Grid>
                 </Paper>
