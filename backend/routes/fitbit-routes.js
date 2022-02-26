@@ -11,16 +11,16 @@ const router = express.Router();
 
 
 // Routes below this are inaccessible unless authenticated
-router.use(checkAuth);
-
-router.get('',
-  passport.authenticate('fitbit', { scope: ['weight', 'location','profile', 'activity', 'sleep', 'heartrate'] })
-);
+//router.use(checkAuth);
 
 router.get('/callback', function(req,res,next){
   passport.authenticate('fitbit')(req,res,next);
   console.log('banana')
   res.status(303).send();
 });
+
+router.get('/:token',
+  passport.authenticate('fitbit', { scope: ['weight', 'location','profile', 'activity', 'sleep', 'heartrate'] })
+);
 
 module.exports = router;

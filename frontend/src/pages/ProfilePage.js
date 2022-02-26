@@ -47,6 +47,9 @@ const ProfilePage = () => {
                             <h2>User Information</h2>
                         </Grid>
                         <Grid item xs>
+                            <a href={`http://localhost:5000/fitbit/${auth.token}`}>
+                                dog
+                            </a>
                             <Button id='fitbit-button' onClick={authenticateWithFitbit} color='primary' variant='outlined' style={{ textDecoration: 'none', color: '#00B0B9' }}>
                                 <FitbitIcon/>
                                 FITBIT
