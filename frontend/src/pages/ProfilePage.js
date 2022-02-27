@@ -21,7 +21,7 @@ const ProfilePage = () => {
     });
     useEffect(async () => {
         try {
-            const res = await fetch(process.env.REACT_APP_BACKEND_URL + '/users', {
+            const res = await fetch(process.env.REACT_APP_BACKEND_URL + '/api/users', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const ProfilePage = () => {
                             <h2>User Information</h2>
                         </Grid>
                         <Grid item xs>
-                            <a href={`http://localhost:5000/fitbit/${auth.token}`} target='_blank' style={{ textDecoration: 'none' }}>
+                            <a href={`${process.env.REACT_APP_BACKEND_URL}/fitbit/${auth.token}`} target='_blank' style={{ textDecoration: 'none' }}>
                             <Button id='fitbit-button' color='primary' variant='outlined' style={{ textDecoration: 'none', color: '#00B0B9' }}>
                                 <FitbitIcon/>
                                 FITBIT

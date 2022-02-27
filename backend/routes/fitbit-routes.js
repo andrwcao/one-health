@@ -13,12 +13,12 @@ const router = express.Router();
 // Routes below this are inaccessible unless authenticated
 //router.use(checkAuth);
 
-router.get('/callback', async function(req,res,next){
+router.get('/callback', function(req,res,next){
   passport.authenticate('fitbit')(req,res,next);
   //res.send("");
   //await new Promise(resolve => setTimeout(resolve, 5000));
   //res.send("<script>window.close();</script>");
-  res.send("<script>window.location.replace('http://localhost:3000/profile');</script>");
+  res.send("<script>window.location.replace('https://one-health-fitness.web.app/profile');</script>");
 });
 
 router.get('/:token',
