@@ -14,15 +14,16 @@ const router = express.Router();
 //router.use(checkAuth);
 
 router.get('/callback', function(req,res,next){
-  passport.authenticate('fitbit')(req,res,next);
+  passport.authorize('fitbit')(req,res,next);
   //res.send("");
   //await new Promise(resolve => setTimeout(resolve, 5000));
   //res.send("<script>window.close();</script>");
   res.send("<script>window.location.replace('https://one-health-fitness.web.app/profile');</script>");
 });
 
-router.get('/:token',
-  passport.authenticate('fitbit', { scope: ['weight', 'location','profile', 'activity', 'sleep', 'heartrate'] })
-);
+router.get('/:token', function(req,res,next){
+  req.session.token = req.params.token;
+  passport.authorize('fitbit', { scope: ['weight', 'location','profile', 'activity', 'sleep', 'heartrate'] })(req,res,next);
+});
 
 module.exports = router;

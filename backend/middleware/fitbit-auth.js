@@ -7,12 +7,15 @@ const User = require('../models/user');
 passport.use(new FitbitStrategy({
     clientID:     '237YKH',
     clientSecret: '32329ffe93dff6284376d7378fa5b624',
-    callbackURL: "https://one-health-fitness.herokuapp.com/fitbit/callback",
+    //"https://one-health-fitness.herokuapp.com/fitbit/callback"
+    callbackURL: "http://localhost:5000/fitbit/callback",
     passReqToCallback: true
   },
   async function(req, accessToken, refreshToken, profile, done) {
+
     //const userId = req.userData.userId;
-    const userId = '621a1e2d65ea8fd0dc517df4';
+    console.log(req.session.token);
+    const userId = '62161270159366ec6304adb8';
     let fitbitId = profile.id;
     let { age, dateOfBirth, height, heightUnit, memberSince, weight, weightUnit } = profile._json.user;
     await User.findOneAndUpdate(
@@ -28,6 +31,6 @@ passport.use(new FitbitStrategy({
             weightUnit,
         }
     );
-    return;
+    return done;
   }
 ));
