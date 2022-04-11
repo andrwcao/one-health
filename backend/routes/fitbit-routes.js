@@ -11,11 +11,10 @@ const router = express.Router();
 
 
 // Routes below this are inaccessible unless authenticated
-//router.use(checkAuth);
 
 router.get('/callback', function(req,res,next){
   passport.authorize('fitbit')(req,res,next);
-  res.send("<script>window.location.replace('https://one-health-fitness.web.app/profile');</script>");
+  res.send(`<script>window.location.replace('${process.env.BASE_CLIENT_URL}/profile');</script>`);
 });
 
 router.get('/:token', function(req,res,next){

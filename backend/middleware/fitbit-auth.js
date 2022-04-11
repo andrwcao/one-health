@@ -10,6 +10,7 @@ passport.use(new FitbitStrategy({
     clientID:     '237YKH',
     clientSecret: '32329ffe93dff6284376d7378fa5b624',
     //"https://one-health-fitness.herokuapp.com/fitbit/callback"
+    //"http://localhost:5000/fitbit/callback"
     callbackURL: "http://localhost:5000/fitbit/callback",
     passReqToCallback: true
   },
@@ -36,7 +37,7 @@ passport.use(new FitbitStrategy({
       return done(error);
     }
 
-    let fitbitId = profile.id;
+    let fitbitId = profile.id;                      
     let { age, dateOfBirth, height, heightUnit, memberSince, weight, weightUnit } = profile._json.user;
     await User.findOneAndUpdate(
         { _id: userId },

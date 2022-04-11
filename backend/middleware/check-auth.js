@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
             return next(error);
         };
 
-        const decodedToken = jwt.verify(token, 'zKt6ncsG92iHSys4All6');
+        const decodedToken = jwt.verify(token, `${process.env.SECRET_KEY}`);
         req.userData = {userId: decodedToken.userId};
         next();
     } catch(err) {
