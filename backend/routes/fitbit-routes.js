@@ -19,6 +19,7 @@ router.get('/callback', function(req,res,next){
 
 router.get('/:token', function(req,res,next){
   req.session.token = req.params.token;
+  console.log('Apple')
   passport.authorize('fitbit', { scope: ['weight', 'location','profile', 'activity', 'sleep', 'heartrate'] })(req,res,next);
 });
 

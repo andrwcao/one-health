@@ -4,7 +4,7 @@
   "description": "Automated Testing for One Health",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --timeout=30000 --require mocha-steps ./showcase.js"
+    "showcase": "./node_modules/mocha/bin/mocha --timeout=30000 --require mocha-steps ./showcase.js"
   },
   "keywords": [
     "OneHealth",

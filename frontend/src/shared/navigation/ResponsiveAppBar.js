@@ -117,7 +117,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             {auth.token ?
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton id="profile-pic" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip> :
@@ -149,8 +149,8 @@ const ResponsiveAppBar = () => {
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
                 :
-                <Link to={setting.toLowerCase().split(' ').join('-')} style={{ textDecoration: 'none', color: 'black' }}>
-                  <MenuItem key={setting} onClick={handleCloseNavMenu}>
+                <Link id={setting} to={setting.toLowerCase().split(' ').join('-')} style={{ textDecoration: 'none', color: 'black' }}>
+                  <MenuItem  key={setting} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 </Link>)

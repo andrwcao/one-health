@@ -66,7 +66,7 @@ const ProfilePage = () => {
                             <h2>User Information</h2>
                         </Grid>
                         <Grid item xs>
-                            <a href={`${process.env.REACT_APP_BACKEND_URL}/fitbit/${auth.token}`} target='_blank' style={{ textDecoration: 'none' }}>
+                            <a href={`${process.env.REACT_APP_BACKEND_URL}/fitbit/${auth.token}`} style={{ textDecoration: 'none' }}>
                             <Button id='fitbit-button' color='primary' variant='outlined' style={{ textDecoration: 'none', color: '#00B0B9' }}>
                                 <FitbitIcon/>
                                 FITBIT
