@@ -1,8 +1,10 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const FitbitStrategy = require( 'passport-fitbit-oauth2' ).FitbitOAuth2Strategy;
 const router = express.Router();
 const User = require('../models/user');
+const HttpError = require('../models/http-error');
 
 passport.use(new FitbitStrategy({
     clientID:     '237YKH',
@@ -12,10 +14,28 @@ passport.use(new FitbitStrategy({
     passReqToCallback: true
   },
   async function(req, accessToken, refreshToken, profile, done) {
+    const token = req.session.token;
+    let userId;
+    try {
+      const token = req.session.token;
+      if (!token) {
+          const error = new HttpError(
+              'Authentication failed.', 
+              401
+          );
+          return done(error);
+      };
 
-    //const userId = req.userData.userId;
-    console.log(req.session.token);
-    const userId = '62161270159366ec6304adb8';
+      const decodedToken = jwt.verify(token, 'zKt6ncsG92iHSys4All6');
+      userId = decodedToken.userId;
+    } catch(err) {
+      const error = new HttpError(
+          'Authentication failed.', 
+          401
+      );
+      return done(error);
+    }
+
     let fitbitId = profile.id;
     let { age, dateOfBirth, height, heightUnit, memberSince, weight, weightUnit } = profile._json.user;
     await User.findOneAndUpdate(

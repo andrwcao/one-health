@@ -15,9 +15,6 @@ const router = express.Router();
 
 router.get('/callback', function(req,res,next){
   passport.authorize('fitbit')(req,res,next);
-  //res.send("");
-  //await new Promise(resolve => setTimeout(resolve, 5000));
-  //res.send("<script>window.close();</script>");
   res.send("<script>window.location.replace('https://one-health-fitness.web.app/profile');</script>");
 });
 
