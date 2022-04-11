@@ -11,7 +11,7 @@ passport.use(new FitbitStrategy({
     clientSecret: '32329ffe93dff6284376d7378fa5b624',
     //"https://one-health-fitness.herokuapp.com/fitbit/callback"
     //"http://localhost:5000/fitbit/callback"
-    callbackURL: "http://localhost:5000/fitbit/callback",
+    callbackURL: "https://one-health-fitness.herokuapp.com/fitbit/callback",
     passReqToCallback: true
   },
   async function(req, accessToken, refreshToken, profile, done) {
