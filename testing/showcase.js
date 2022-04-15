@@ -61,6 +61,28 @@ describe('Showcase', () => {
         expect(await isXPathVisible(page, '//*[@id="root"]/header/header/div/div/div[4]/a[1]/button')).to.be.true;
     })
 
+    step('should go to profile page', async () => {
+        await click(page, '#profile-pic');
+        await click(page, '#Profile');
+
+        expect(await isElementVisible(page, '#fitbit-button')).to.be.true;
+
+        await click(page, '#fitbit-button');
+        await page.waitForTimeout(2000);
+    })
+
+    step('should go to fitbit page and return to profile', async () => {
+        // Modify with proper values to work
+        await typeText(page, '#ember651', 'XXX');
+        await typeText(page, '#ember652', 'XXX');
+        await click(page, '#ember692');
+        await page.waitForTimeout(8000);
+        await page.goto('http://localhost:3000/profile');
+
+        expect(await isElementVisible(page, '#fitbit-button')).to.be.true;
+        await page.waitForTimeout(4000);
+    })
+
     step('should go to weight page', async () => {
         await page.goto('http://localhost:3000/weight');
     })
@@ -84,7 +106,11 @@ describe('Showcase', () => {
             await page.keyboard.press('Backspace');
         }
         await page.keyboard.type('11/17/2021');
-        await page.waitForTimeout(5000);
     })
     
+    step('should go profile page to demonstrate date', async () => {
+        await page.goto('http://localhost:3000/profile');
+        expect(await isElementVisible(page, '#fitbit-button')).to.be.true;
+        await page.waitForTimeout(10000);
+    })
 })
