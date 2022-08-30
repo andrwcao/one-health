@@ -14,12 +14,12 @@ const router = express.Router();
 
 router.get('/callback', function(req,res,next){
   passport.authorize('fitbit')(req,res,next);
-  res.send(`<script>window.location.replace('${process.env.BASE_CLIENT_URL}/profile');</script>`);
+  res.redirect(`${process.env.BASE_CLIENT_URL}/profile`);
+  //res.send(`<script>window.location.replace('${process.env.BASE_CLIENT_URL}/profile');</script>`);
 });
 
 router.get('/:token', function(req,res,next){
   req.session.token = req.params.token;
-  console.log('Apple')
   passport.authorize('fitbit', { scope: ['weight', 'location','profile', 'activity', 'sleep', 'heartrate'] })(req,res,next);
 });
 

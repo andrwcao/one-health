@@ -17,6 +17,9 @@ const userSchema = new Schema(
         memberSince: { type: String },
         weight: { type: String },
         weightUnit: { type: String },
+        accessToken: { type: String },
+        refreshToken: { type: String },
+        lastUpdateTimestamp: { type: Date },
     }
 );
 

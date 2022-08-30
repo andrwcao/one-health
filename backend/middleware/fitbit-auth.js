@@ -23,6 +23,7 @@ passport.use(new FitbitStrategy({
               'Authentication failed.', 
               401
           );
+          console.error(error);
           return done(error);
       };
 
@@ -33,12 +34,14 @@ passport.use(new FitbitStrategy({
           'Authentication failed.', 
           401
       );
+      console.error(error);
       return done(error);
     }
 
     let fitbitId = profile.id;                      
     let { age, dateOfBirth, height, heightUnit, memberSince, weight, weightUnit } = profile._json.user;
-    await User.findOneAndUpdate(
+    try {
+      await User.findOneAndUpdate(
         { _id: userId },
         {
             fitbitId,
@@ -49,8 +52,14 @@ passport.use(new FitbitStrategy({
             memberSince,
             weight,
             weightUnit,
+            accessToken,
+            refreshToken,
+            $currentDate: { lastUpdateTimestamp: true },
         }
-    );
-    return done;
+      );
+      console.log('Updated user with Fitbit details');
+    } catch (error) {
+      console.error(error);
+    }
   }
 ));
